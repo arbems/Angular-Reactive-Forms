@@ -1,29 +1,29 @@
 <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
 
-  <label for="documentalClassId">Documental class id: </label>
-  <input id="documentalClassId" type="text" formControlName="documentalClassId">
+  <label for="id">Id: </label>
+  <input id="id" type="text" formControlName="id">
 
   <label for="code">Code: </label>
   <input id="code" type="text" formControlName="code">
   <label *ngIf="code.hasError('required')"> Code es requerido. </label>
   <label *ngIf="code.hasError('pattern')"> Code debe ser numérico. </label>
 
-  <label for="displayName">Descripción: </label>
-  <input id="displayName" type="text" formControlName="displayName">
-  <label *ngIf="displayName.hasError('required')"> Descripción es requerido. </label>
+  <label for="firstname">Nombre: </label>
+  <input id="firstname" type="text" formControlName="firstname">
+  <label *ngIf="firstname.hasError('required')"> Nombre es requerido. </label>
 
-  <label for="aireName">Nombre Aire: </label>
-  <input id="aireName" type="text" formControlName="aireName">
-  <label *ngIf="aireName.hasError('required')"> Código en Aire es requerido. </label>
+  <label for="lastName">Apellido: </label>
+  <input id="lastName" type="text" formControlName="lastName">
+  <label *ngIf="lastName.hasError('required')"> Apellido es requerido. </label>
 
-  <label for="highSecurityLevel">highSecurityLevel:</label>
-  <input id="highSecurityLevel" type="checkbox" formControlName="highSecurityLevel">
+  <label for="securityLevel">Seguridad:</label>
+  <input id="securityLevel" type="checkbox" formControlName="securityLevel">
 
-  <label for="enabled">Enabled:</label>
+  <label for="enabled">Habilitado:</label>
   <input id="enabled" type="checkbox" formControlName="enabled">
 
-  <div formGroupName="aireIntegration">
-    <h2>Integración aire</h2>
+  <div formGroupName="info">
+    <h2>Información</h2>
 
     <label for="validate">Validar: </label>
     <input id="validate" type="text" formControlName="validate">
@@ -32,42 +32,43 @@
     <input id="notify" type="text" formControlName="notify">
   </div>
 
-  <div formArrayName="symbolicNames">
-    <h2>Valido en subclases</h2>
-    <button type="button" (click)="addSymbolicName()">+ Añadar subclase</button>
+  <div formArrayName="list">
+    <h2>Lista 1</h2>
+    <button type="button" (click)="addItem()">+ Añadar subclase</button>
 
-    <div *ngFor="let symbolicName of symbolicNames.controls; let i=index">
+    <div *ngFor="let item of list.controls; let i=index">
       <!-- The repeated alias template -->
-      <label for="symbolicName-{{ i }}">Subclase:</label>
-      <input id="symbolicName-{{ i }}" type="checkbox" [formControlName]="i">
+      <label for="item-{{ i }}">Item:</label>
+      <input id="item-{{ i }}" type="checkbox" [formControlName]="i">
     </div>
   </div>
 
-  <div formArrayName="documentalClassesSiblings">
-    <h2>Clases hermandas</h2>
+  <div formArrayName="list2">
+    <h2>Lista 2</h2>
 
-    <div *ngFor="let sibling of documentalClassesSiblings.controls; let i=index">
+    <div *ngFor="let item of list2.controls; let i=index">
 
       <div [formGroupName]="i">
 
+        <h4>Lista 3</h4>
+
         <!-- The repeated alias template -->
-        <label for="selectedSibling-{{ i }}">selectedSibling:</label>
-        <input id="selectedSibling-{{ i }}" type="checkbox" formControlName="selectedSibling"> -->
+        <label for="item-{{ i }}">Item 1:</label>
+        <input id="item-{{ i }}" type="checkbox" formControlName="item1">
 
-        <label for="documentalClassSiblingId-{{ i }}">documentalClassSiblingId:</label>
-        <input id="documentalClassSiblingId-{{ i }}" type="text" formControlName="documentalClassSiblingId">
+        <label for="item-{{ i }}">Item 2:</label>
+        <input id="item-{{ i }}" type="text" formControlName="item2">
 
-        <label for="selectedDocumentalClassId-{{ i }}">selectedDocumentalClassId:</label>
-        <input id="selectedDocumentalClassId-{{ i }}" type="text" formControlName="selectedDocumentalClassId">
+        <label for="item-{{ i }}">Item 3:</label>
+        <input id="item-{{ i }}" type="text" formControlName="item3">
 
-        <label for="documentTypeCodeToCopyAuthorization-{{ i }}">documentTypeCodeToCopyAuthorization:</label>
-        <input id="documentTypeCodeToCopyAuthorization-{{ i }}" type="text" formControlName="documentTypeCodeToCopyAuthorization">
+        <label for="item-{{ i }}">Item 4:</label>
+        <input id="item-{{ i }}" type="text" formControlName="item4">
 
-        <div formArrayName="symbolicNamesSibling">
-          <div *ngFor="let symbolicName of symbolicNamesSiblings(i).controls; let y=index">
-            The repeated alias template
-            <label for="symbolicNameSibling-{{ y }}">Subclase:</label>
-            <input id="symbolicNameSibling-{{ y }}" type="checkbox" [formControlName]="y">
+        <div formArrayName="list3">
+          <div *ngFor="let element of list3(i).controls; let y=index">
+            <label for="element-{{ y }}">Element:</label>
+            <input id="element-{{ y }}" type="checkbox" [formControlName]="y">
           </div>
         </div>
 

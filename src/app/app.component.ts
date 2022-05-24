@@ -19,39 +19,37 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   profileForm = this.fb.group({
-    documentalClassId: ['', Validators.required],
+    id: ['', Validators.required],
     code: ['', [Validators.required, Validators.pattern("^[0-9]*$")]],
-    displayName: ['', Validators.required],
-    aireName: ['', Validators.required],
-    highSecurityLevel: [false],
+    firstname: ['', Validators.required],
+    lastName: ['', Validators.required],
+    securityLevel: [false],
     enabled: [false],
-    aireIntegration: this.fb.group({
+    info: this.fb.group({
       validate: [false],
       notify: [false],
     }),
-    symbolicNames: this.fb.array([
+    list: this.fb.array([
       this.fb.control(true),
       this.fb.control(false)
     ]),
-    documentTypeCodeToCopyAuthorization: ['', Validators.required],
-    documentalClassesSiblings: this.fb.array([
+    list2: this.fb.array([
       this.fb.group({
-        selectedSibling: this.fb.control(true),
-        documentalClassSiblingId: this.fb.control(''),
-        selectedDocumentalClassId: this.fb.control(''),
-        documentTypeCodeToCopyAuthorization: this.fb.control(''),
-        symbolicNamesSibling: this.fb.array([
+        item1: this.fb.control(true),
+        item2: this.fb.control(''),
+        item3: this.fb.control(''),
+        item4: this.fb.control(''),
+        list3: this.fb.array([
           this.fb.control(true),
           this.fb.control(false)
         ])
       }),
       this.fb.group({
-        selectedSibling: this.fb.control(true),
-        documentalClassSiblingId: this.fb.control(''),
-        selectedDocumentalClassId: this.fb.control(''),
-        documentTypeCodeToCopyAuthorization: this.fb.control(''),
-        symbolicNamesSibling: this.fb.array([
-          this.fb.control(true),
+        item1: this.fb.control(false),
+        item2: this.fb.control(''),
+        item3: this.fb.control(''),
+        item4: this.fb.control(''),
+        list3: this.fb.array([
           this.fb.control(false)
         ])
       })
@@ -62,47 +60,45 @@ export class AppComponent implements OnInit, AfterViewInit {
     return this.profileForm.get('code') as FormControl;
   }
 
-  get displayName() {
-    return this.profileForm.get('displayName') as FormControl;
+  get firstname() {
+    return this.profileForm.get('firstname') as FormControl;
   }
 
-  get aireName() {
-    return this.profileForm.get('aireName') as FormControl;
+  get lastName() {
+    return this.profileForm.get('lastName') as FormControl;
   }
 
-  get symbolicNames() {
-    return this.profileForm.get('symbolicNames') as FormArray;
+  get list() {
+    return this.profileForm.get('list') as FormArray;
   }
 
-  get documentalClassesSiblings() {
-    return this.profileForm.get('documentalClassesSiblings') as FormArray;
+  get list2() {
+    return this.profileForm.get('list2') as FormArray;
   }
 
-  symbolicNamesSiblings(i: number) {
-    var array = this.profileForm.get('documentalClassesSiblings') as FormArray;
-    return array.at(i).get('symbolicNamesSibling') as FormArray;
+  list3(i: number) {
+    var array = this.profileForm.get('list2') as FormArray;
+    return array.at(i).get('list3') as FormArray;
   }
 
-  
-
-  addSymbolicName() {
-    this.symbolicNames.push(this.fb.control(''));
+  addItem() {
+    this.list.push(this.fb.control(false));
   }
 
   updateProfile() {
     this.profileForm.patchValue({
-      documentalClassId: "f9eb5531-7d5a-40a3-8d5b-d668fa388559",
+      id: "f9eb5531-7d5a-40a3-8d5b-d668fa388559",
       code: "721",
-      displayName: 'displayName',
-      aireIntegration: {
+      firstname: 'Alberto',
+      info: {
         validate: true
       },
-      documentalClassesSiblings: [
+      list2: [
         {
-          selectedSibling: false,
-          documentalClassSiblingId: "b0777777-2122-419d-bb39-bce3f85aad84",
-          selectedDocumentalClassId: "81d0a292-7f2f-407d-9444-c4deb1f7aec0",
-          documentTypeCodeToCopyAuthorization: "2",
+          item1: false,
+          item2: "b0777777-2122-419d-bb39-bce3f85aad84",
+          item3: "81d0a292-7f2f-407d-9444-c4deb1f7aec0",
+          item4: "2",
         }
       ]
     });
